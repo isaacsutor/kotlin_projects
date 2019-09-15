@@ -37,9 +37,9 @@ Sabacc's main objective is to win Credits.
 There are two pots: The main pot and the Sabacc pot.
 Each hand starts with each player placing an ante into both the Main Pot and the Sabacc Pot.
 Subsequent bets during the hand will be placed only into the Main Pot.
-eginning with the player to the dealer's left, each player may elect to either bet or fold.
+Beginning with the player to the dealer's left, each player may elect to either bet or fold.
 Going clockwise from that player, each person must match the previous bet to stay in the hand.
-hey may also raise the bet to a new amount.
+They may also raise the bet to a new amount.
 If a raise is made, all players must at least match the new bet amount to stay in the hand.
 When no one wishes to raise any more, the betting is over.
 

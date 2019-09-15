@@ -3,7 +3,8 @@ import java.util.ArrayList
 
 
 class Deck() {
-    val deck = generateDeck()
+    val deckList = generateDeck()
+
     /***
      * Function which generates cards for a single suit
      * params: s is a Suit from the sabacc
@@ -18,6 +19,7 @@ class Deck() {
             Card(s, Rank.MISTRESS), Card(s, Rank.MASTER), Card(s, Rank.ACE)
         )
     }
+
     /***
      * This function is unused currently but will probably be needed for optimization to add FACECARDS
      * params: none
@@ -64,7 +66,7 @@ class Deck() {
         return deckGen
 
     }
-    
+
 
 
 }
