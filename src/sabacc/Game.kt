@@ -18,7 +18,7 @@ class Game(){
     /***
      * This function takes one Card off the top of the Deck
      * params: none
-     * returns:
+     * returns: none
      *
      */
     fun draw(): Card {
@@ -27,6 +27,8 @@ class Game(){
 
     /***
      * This function deals a hand for a player which is 2 Cards
+     * params: the player to deal to
+     * return: none
      */
     fun deal(player: Player) {
         player.hand.addCard(deck.deckList.removeAt(0))
