@@ -1,4 +1,5 @@
 *** Rules of Sabacc Courtesy of http://sabacc.sourceforge.net/rules. ***
+*** Also consulted https://www.pagat.com/invented/sabacc.html ***
 *** Based on the card game from Disney/LucasFilm's Star Wars ***
 
 "Rules of Sabacc
