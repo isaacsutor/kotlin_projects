@@ -135,14 +135,17 @@ fun main() {
         // SHIFTING ROUND: IMPLEMENT LATER
 
 
-        // CALLING ROUND
-        called = true
 
+        if (round >= 4) {
+            // CALLING ROUND
+            called = true
+        }
+        round++
     }
 
     // DETERMINE WINNER
     // check scores compare to -23 or 23. Ties for distance broken by pos win.
-    var maxScore = -100
+    //var maxScore = -100
     for (person in 0..nPlayers) {
 
     }
