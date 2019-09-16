@@ -9,45 +9,43 @@ import java.util.ArrayList
  *          players: ArrayList of Players still in the game
  *          currentGame: the Game at play
  */
-fun bettingRound(nPlayers: Int, players: ArrayList<Player>, currentGame: Game) {
+fun bettingRound(numberPlayersInRound: Int, players: ArrayList<Player>, currentGame: Game) {
     // start rounds for betting || check each card change for bombOut
     // let each player bet
-    for (numPlayer in 0..nPlayers) {
+    for (initBetPlayer in 0..numberPlayersInRound) {
         // set bet
         var bet = 0
-        val pName = players[numPlayer].name
-        print("$pName would you like to place a bet: ")
-        val stringInput = readLine()!!
-        if (stringInput.toLowerCase() == "y") {
+        val currentPlayerNameForStartBet = players[initBetPlayer].name
+        print("$currentPlayerNameForStartBet would you like to place a bet: ")
+        val placeBetBool = readLine()!!
+        if (placeBetBool.toLowerCase() == "y") {
             print("How much would you like to bet: ")
-            val stringInput = readLine()!!
-            val bet = stringInput.toInt()
+            val betAmount = readLine()!!
+            val bet = betAmount.toInt()
         }
         // let players match, raise, or fold
-        for (numPlayers in 0..nPlayers) {
-            if (numPlayers == numPlayer) {
+        for (reactPlayer in 0..numberPlayersInRound) {
+            if (reactPlayer == initBetPlayer) {
 
             }
             else {
-                val pName = players[numPlayers].name
+                val currentPlayerName = players[reactPlayer].name
                 var validInput = true
                 // loop through if no valid input || may do more complex validation later
                 while (validInput) {
-                    print("$pName would you like to RAISE, MATCH, or FOLD: ")
-                    val stringInput = readLine()!!
-                    if (stringInput.toLowerCase() == "raise") {
+                    print("$currentPlayerName would you like to RAISE, MATCH, or FOLD: ")
+                    val playerMoveInput = readLine()!!
+                    if (playerMoveInput.toLowerCase() == "raise") {
                         print("How much would you like to raise: ")
                         val stringInput = readLine()!!
                         val bet = stringInput.toInt()
                     }
-                    else if (stringInput.toLowerCase() == "match") {
+                    else if (playerMoveInput.toLowerCase() == "match") {
                         // maybe add player bet in data class
                         break
                     }
-                    else if (stringInput.toLowerCase() == "fold") {
-                        currentGame.fold(players[numPlayers])
-                        val stringInput = readLine()!!
-                        val bet = stringInput.toInt()
+                    else if (playerMoveInput.toLowerCase() == "fold") {
+                        //TODO: implement fold to remove player from list of active players
                     }
                     else {
                         validInput = false
@@ -71,8 +69,13 @@ fun drawingRound(nPlayers: Int, players: ArrayList<Player>, currentGame: Game) {
     }
 }
 
+/***
+ * This Function allows for each player to "Call", stopping the betting round if there is enough call votes
+ * params: none
+ * return: none
+ */
 fun callingRound() {
-
+    //TODO: Implement calling round features as described in rules.txt
 }
 
 
@@ -83,25 +86,25 @@ fun main() {
     // set up number of players at the table
     print("Please Enter Number of Players at Table:  ")
     val stringInput = readLine()!!
-    val nPlayers = stringInput.toInt() - 1
+    val numberOfPlayersAtTable = stringInput.toInt() - 1
 
     // Add players with player input name based on response
-    val players = arrayListOf<Player>()
+    val listOfPlayers = arrayListOf<Player>()
     val initHand = Hand(arrayListOf(Card(Suit.SABERS, Rank.ONE)))
-    for (numPlayers in 0..nPlayers) {
+    for (numPlayers in 0..numberOfPlayersAtTable) {
         // get player name
         print("Please Enter Your Name:  ")
-        val stringInput = readLine()!!
+        val playerNameFromInput = readLine()!!
 
         // get player bank amount
-        print("$stringInput please enter your starting bank account and pay the house: ")
-        val stringInput2 = readLine()!!
-        val playerPotVal = stringInput2.toInt()
+        print("$playerNameFromInput please enter your starting bank account and pay the house: ")
+        val playerPotValFromInput = readLine()!!
+        val playerPotVal = playerPotValFromInput.toInt()
 
         // create player and add them to the array of players
-        val player = Player(stringInput, initHand, Pot(playerPotVal), false)
+        val player = Player(playerNameFromInput, initHand, Pot(playerPotVal), false)
         player.emptyHand()
-        players.add(player)
+        listOfPlayers.add(player)
     }
 
     // make the pots/set up game play, ante and get players initial hands
@@ -109,17 +112,17 @@ fun main() {
     var mainPot = Pot(0)
 
     // loop through each player to remove any players not playing this round
-    for (numPlayers in 0..nPlayers) {
-        val pName = players[numPlayers].name
-        print("$pName: Do you want to ante? (Y/N) ")
-        val stringInput = readLine()!!
+    for (numPlayers in 0..numberOfPlayersAtTable) {
+        val currentPlayerName = listOfPlayers[numPlayers].name
+        print("$currentPlayerName: Do you want to ante? (Y/N) ")
+        val playerAnteBool = readLine()!!
 
-        if (stringInput.toLowerCase() == "y") {
-            currentGame.deal(players[numPlayers])
+        if (playerAnteBool.toLowerCase() == "y") {
+            currentGame.deal(listOfPlayers[numPlayers])
         }
         else {
             // bombOut = true will remove the player from gameplay so its the same as if they aren't playing
-            players[numPlayers].bombOut = true
+            listOfPlayers[numPlayers].bombOut = true
         }
     }
     var called = false
@@ -132,7 +135,7 @@ fun main() {
 
 
 
-        // SHIFTING ROUND: IMPLEMENT LATER
+        // SHIFTING ROUND: IMPLEMENT LATER (waiting on interference field for regular gameplay)
 
 
 
@@ -146,7 +149,7 @@ fun main() {
     // DETERMINE WINNER
     // check scores compare to -23 or 23. Ties for distance broken by pos win.
     //var maxScore = -100
-    for (person in 0..nPlayers) {
+    for (person in 0..numberOfPlayersAtTable) {
 
     }
     // if tie, complete Sudden Demise

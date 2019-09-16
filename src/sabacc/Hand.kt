@@ -20,6 +20,7 @@ class Hand(hand: ArrayList<Card>): Comparable<Hand> {
         for (card in cards){
             value += card.cardRank.cardValue
         }
+        score = value
         return value
     }
 
@@ -30,6 +31,7 @@ class Hand(hand: ArrayList<Card>): Comparable<Hand> {
      */
     fun addCard(c: Card) {
         cards.add(c)
+        scoreHand()
     }
 
     /***
